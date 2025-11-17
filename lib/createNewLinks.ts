@@ -31,7 +31,7 @@ export default async function createNewLinks(
     // insert into mongoDB
     const res = await postCollection.insertOne({...link});
     if (!res.acknowledged) {
-        throw new Error("Failed to insert into DB");
+        throw new Error("Failed to insert into the DB");
     }
 
 

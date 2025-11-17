@@ -8,7 +8,7 @@ export default async function AliasRedirectPage({ params }: { params: Promise<{ 
     const link = await getLinkFromAlias(alias);
 
     if (!link) {
-        redirect("/404");
+        redirect("/");
     }
 
     redirect(link.url);

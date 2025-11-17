@@ -1,8 +1,6 @@
 import getCollection, { LINKS_COLLECTION } from "@/db";
 import { LinkProps } from "@/types";
 export default async function getLinkFromAlias(alias: string): Promise<LinkProps | null> {
-    // const pos\
-    // tId = ObjectId.createFromHexString(id);
     const linksCollection = await getCollection (LINKS_COLLECTION);
 
     console.log(alias);

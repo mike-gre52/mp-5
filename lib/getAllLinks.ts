@@ -2,8 +2,8 @@ import {LinkProps} from "@/types";
 import getCollection, {LINKS_COLLECTION} from "@/db";
 
 export default async function getAllLinks(): Promise<LinkProps[]> {
-    const postsCollection = await getCollection(LINKS_COLLECTION);
-    const data = await postsCollection.find().toArray();
+    const linksCollection = await getCollection(LINKS_COLLECTION);
+    const data = await linksCollection.find().toArray();
 
     const links: LinkProps[] = data.map((p) => ({
         id: p._id.toHexString(),

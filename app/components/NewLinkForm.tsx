@@ -18,11 +18,19 @@ export default function NewLinkForm({
     return (
         <form className="p-2"
               onSubmit={async (event) => {
-                  setError("")
                   event.preventDefault();
-                  createNewLinks(url,alias)
-                      .then((newLink) => append(newLink))
-                      .catch((err) => setError(err.message));
+                  setError("");
+
+                  //Switch to try catch for next.js error handeling to be passed to front end
+                  try {
+                      const newLink = await createNewLinks(url, alias);
+                      append(newLink);
+                      setUrl("");
+                      setAlias("");
+                  } catch (err) {
+                      const error = err as Error;
+                      setError(error.message);
+                  }
               }}
         >
             <TextField
