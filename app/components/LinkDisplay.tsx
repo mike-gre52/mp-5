@@ -15,6 +15,8 @@ export default function LinkDisplay({
     return (
         <div className="flex flex-col items-center">
             {/*Add URL*/}
+            <h1 className="text-4xl font-bold text-gray-800">URL Shortener</h1>
+            <h3 className="text-2xl text-gray-400">Enter a URL below and an alias to create a link to that site!</h3>
             <NewLinkForm
                 append={(newLinks: LinkProps) => {
                     setLinks([...links, newLinks]);

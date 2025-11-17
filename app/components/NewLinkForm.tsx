@@ -1,9 +1,8 @@
 "use-client";
 
 import createNewLinks from "@/lib/createNewLinks";
-import { Textarea } from "@mui/joy";
 
-import {Button, FormHelperText, TextField} from "@mui/material";
+import {Button, TextField, Typography} from "@mui/material";
 import {useState} from "react";
 import {LinkProps} from "@/types";
 
@@ -14,39 +13,43 @@ export default function NewLinkForm({
 }){
     const [url, setUrl] = useState("");
     const [alias, setAlias] = useState("");
+    const [error, setError] = useState("");
 
     return (
-        <form className=""
+        <form className="p-2"
               onSubmit={async (event) => {
+                  setError("")
                   event.preventDefault();
                   createNewLinks(url,alias)
                       .then((newLink) => append(newLink))
-                      .catch((err) => console.log(err));
+                      .catch((err) => setError(err.message));
               }}
         >
             <TextField
-                variant="filled"
-                sx={{  backgroundColor: "white", width: "100%"}}
+                sx={{
+                    width: "100%",
+                    borderRadius: 10,
+                }}
                 label = "Url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
             />
-            <Textarea
+            <TextField
                 sx={{
-                    padding: "0.5rem",
-                    height: "100px",
+                    paddingTop: "5%",
+                    paddingBottom: "2%",
                     width: "100%",
-                    borderRadius: 0,
+                    borderRadius: 10,
                 }}
-                variant="soft"
+
                 placeholder="Alias"
                 value={alias}
                 onChange={(e) => setAlias(e.target.value)}
             />
-            <FormHelperText>Whats on your mind?</FormHelperText>
-            <div className=" w-full flex justify-end">
+            <Typography variant="body2" component="p" color="error">{error}</Typography>
+            <div>
                 <Button
-                    sx = {{ width: "80px"}}
+                    sx = {{ width: "80px" }}
                     variant="contained"
                     type="submit"
                     disabled={url === "" || alias === ""}
