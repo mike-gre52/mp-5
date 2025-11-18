@@ -15,7 +15,8 @@ export default async function createNewLinks(
     //Check if URL is valid
     if (!isValidURL(url)) {
         console.log("Throw error for invalud url");
-        throw new Error("Invalid URL entered");
+        return {error: "Invalid URL entered"}
+        //throw new Error("Invalid URL entered");
     }
 
     const postCollection = await getCollection(LINKS_COLLECTION);
@@ -23,8 +24,9 @@ export default async function createNewLinks(
     //Check if alias already exists
     const foundAliasInDB = await postCollection.findOne({alias})
     if (foundAliasInDB) {
-        console.log("Throw error  alias alreadhy exists");
-        throw new Error("Alias already exists");
+        console.log("Throw error  alias already exists");
+        return {error: "Alias already exists"}
+        //throw new Error("Alias already exists");
     }
 
     // insert into mongoDB
