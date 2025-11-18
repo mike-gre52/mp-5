@@ -20,7 +20,7 @@ export default function NewLinkForm({
               onSubmit={async (event) => {
                   event.preventDefault();
                   setError("");
-
+                  console.log("clicked submit");
                   //Switch to try catch for next.js error handeling to be passed to front end
                   try {
                       const newLink = await createNewLinks(url, alias);
@@ -29,6 +29,7 @@ export default function NewLinkForm({
                       setAlias("");
                   } catch (err) {
                       const error = err as Error;
+                      console.log(err);
                       setError(error.message);
                   }
               }}
