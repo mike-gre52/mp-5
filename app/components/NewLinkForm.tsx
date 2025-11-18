@@ -62,7 +62,7 @@ export default function NewLinkForm({
                     type="submit"
                     disabled={url === "" || alias === ""}
                 >
-                    Create
+                    Add
                 </Button>
             </div>
 

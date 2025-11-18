@@ -1,17 +1,21 @@
 "use server";
 import getCollection, {LINKS_COLLECTION} from "@/db";
-import { LinkProps } from "@/types"
+//import { LinkProps } from "@/types"
 import {isValidURL} from "@/lib/isValidURL";
 
 export default async function createNewLinks(
     url: string,
     alias: string,
-): Promise<LinkProps> {
+) {
     const link ={
         url: url,
         alias: alias,
     };
 
+    //Check if URL is valid
+    if (!isValidURL(url)) {
+        throw new Error("Invalid URL entered");
+    }
 
     const postCollection = await getCollection(LINKS_COLLECTION);
 
@@ -20,13 +24,6 @@ export default async function createNewLinks(
     if (foundAliasInDB) {
         throw new Error("Alias already exists");
     }
-
-    //Check if URL is valid
-    if (!isValidURL(url)) {
-        throw new Error("Invalid URL entered");
-    }
-
-
 
     // insert into mongoDB
     const res = await postCollection.insertOne({...link});
