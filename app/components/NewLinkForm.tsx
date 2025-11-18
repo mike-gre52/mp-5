@@ -1,4 +1,4 @@
-"use-client";
+"use client";
 
 import createNewLinks from "@/lib/createNewLinks";
 
@@ -63,7 +63,7 @@ export default function NewLinkForm({
                     type="submit"
                     disabled={url === "" || alias === ""}
                 >
-                    Add
+                    Shorten
                 </Button>
             </div>
 
