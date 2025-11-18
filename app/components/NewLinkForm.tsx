@@ -24,14 +24,14 @@ export default function NewLinkForm({
                   try {
                       const newLink = await createNewLinks(url, alias);
 
+                      //check for error
                       if (newLink.error) {
                           setError(newLink.message!);
                           return;
                       }
-
-                      // Otherwise it's success
+                      //Success if we get to this part
+                      // source for force unwrapping https://stackoverflow.com/questions/60698682/implicitly-unwrapped-optionals-in-typescript
                       append(newLink.data!);
-
                       setUrl("");
                       setAlias("");
 
