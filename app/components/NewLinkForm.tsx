@@ -20,21 +20,23 @@ export default function NewLinkForm({
               onSubmit={async (event) => {
                   event.preventDefault();
                   setError("");
-                  console.log("clicked submit");
-                  //Switch to try catch for next.js error handeling to be passed to front end
+
                   try {
                       const newLink = await createNewLinks(url, alias);
-                      if (newLink.error !== null) {
-                          //force unwrap source: https://stackoverflow.com/questions/60698682/implicitly-unwrapped-optionals-in-typescript
-                          setError(newLink.error!);
-                      } else {
-                          append(newLink);
-                          setUrl("");
-                          setAlias("");
+
+                      if (newLink.error) {
+                          setError(newLink.message!);
+                          return;
                       }
+
+                      // Otherwise it's success
+                      append(newLink.data!);
+
+                      setUrl("");
+                      setAlias("");
+
                   } catch (err) {
                       const error = err as Error;
-                      console.log(err);
                       setError(error.message);
                   }
               }}
@@ -68,7 +70,7 @@ export default function NewLinkForm({
                     type="submit"
                     disabled={url === "" || alias === ""}
                 >
-                    Add
+                    Shorten
                 </Button>
             </div>
 
